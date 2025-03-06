@@ -1,3 +1,4 @@
+import { Shape } from './Shape';
 import { Vector } from './Vector';
 
 export class Sketch {
@@ -18,16 +19,34 @@ export class Sketch {
     this.svg.style.background = color;
   }
 
-  point(position: Vector, color: string = 'black') {
+  point(position: Vector, color: string = 'black'): Shape {
+    const point = document.createElementNS(
+      'http://www.w3.org/2000/svg',
+      'circle'
+    );
+    point.setAttribute('cx', position.x.toString());
+    point.setAttribute('cy', position.y.toString());
+    point.setAttribute('r', '2');
+    point.setAttribute('fill', color);
+
+    const shape = new Shape(point, position);
+    this.svg.appendChild(point);
+    return shape;
+  }
+
+  circle(center: Vector, radius: number, color: string = 'black'): Shape {
     const circle = document.createElementNS(
       'http://www.w3.org/2000/svg',
       'circle'
     );
-    circle.setAttribute('cx', position.x.toString());
-    circle.setAttribute('cy', position.y.toString());
-    circle.setAttribute('r', '2');
+    circle.setAttribute('cx', center.x.toString());
+    circle.setAttribute('cy', center.y.toString());
+    circle.setAttribute('r', radius.toString());
     circle.setAttribute('fill', color);
+
+    const shape = new Shape(circle, center);
     this.svg.appendChild(circle);
+    return shape;
   }
 
   clear() {
