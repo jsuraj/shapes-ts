@@ -49,6 +49,28 @@ export class Sketch {
     return shape;
   }
 
+  line(
+    start: Vector,
+    end: Vector,
+    color: string = 'black',
+    strokeWidth: number = 2
+  ): Shape {
+    const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+    line.setAttribute('x1', start.x.toString());
+    line.setAttribute('y1', start.y.toString());
+    line.setAttribute('x2', end.x.toString());
+    line.setAttribute('y2', end.y.toString());
+    line.setAttribute('stroke', color);
+    line.setAttribute('stroke-width', strokeWidth.toString());
+
+    const midX = (start.x + end.x) / 2;
+    const midY = (start.y + end.y) / 2;
+
+    const shape = new Shape(line, new Vector(midX, midY));
+    this.svg.appendChild(line);
+    return shape;
+  }
+
   clear() {
     this.svg.innerHTML = '';
   }
