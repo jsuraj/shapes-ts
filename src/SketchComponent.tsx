@@ -12,7 +12,11 @@ const SketchComponent: React.FC<SketchComponentProps> = ({ code }) => {
 
   useEffect(() => {
     if (containerRef.current && !sketchRef.current) {
-      sketchRef.current = new Sketch(containerRef.current, 500, 500);
+      const container = containerRef.current;
+      const width = container.clientWidth;
+      const height = container.clientHeight;
+
+      sketchRef.current = new Sketch(containerRef.current, width, height);
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       (window as any).Vector = Vector;
     }

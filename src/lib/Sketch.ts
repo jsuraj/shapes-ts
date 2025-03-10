@@ -8,8 +8,9 @@ export class Sketch {
   constructor(container: HTMLElement, public width = 500, public height = 500) {
     this.container = container;
     this.svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-    this.svg.setAttribute('width', width.toString());
-    this.svg.setAttribute('height', height.toString());
+    this.svg.setAttribute('width', '100%');
+    this.svg.setAttribute('height', '100%');
+    this.svg.setAttribute('viewBox', `0 0 ${this.width} ${this.height}`);
 
     this.container.innerHTML = '';
     this.container.appendChild(this.svg);
